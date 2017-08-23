@@ -10,7 +10,7 @@
                     </h2>
                 </div>
                 <div class="body">
-                    <form v-on:submit.prevent="submitForm" action="{{ url('/admin') }}" method="post" id="form-validation">
+                    <form  action="{{ url('/admin') }}" method="post" id="form-validation">
 
                         {{ csrf_field() }}
 

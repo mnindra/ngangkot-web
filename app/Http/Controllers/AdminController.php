@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Firebase\FirebaseLib;
+use App\Admin;
 
 class AdminController extends Controller
 {
@@ -12,11 +12,6 @@ class AdminController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-
-    public function __construct()
-    {
-      $this->firebase = new FirebaseLib(env('databaseURL'), env('dbSecreat'));
-    }
 
     public function index()
     {
@@ -53,17 +48,9 @@ class AdminController extends Controller
       // drop if its ajax
       if ($request->ajax()) return;
 
-      // saving to firebase
-      $id = uniqid();
-      $path = "/admin/" . $id . "/";
-      $data = array(
-        'id_admin' => $id,
-        'nama' => $request->input('nama'),
-        'telp' => $request->input('telp'),
-        'username' => $request->input('username'),
-        'password' => md5($request->input('username'))
-      );
-      $this->firebase->set($path, $data);
+      // save to firebase
+      $admin = new Admin();
+      $admin->create($request->all());
 
       return redirect('/admin');
     }
