@@ -48,9 +48,11 @@ class AdminController extends Controller
       // drop if its ajax
       if ($request->ajax()) return;
 
+      // encrypt password
+      $request->merge(['password' => md5($request->input('password'))]);
+
       // save to firebase
-      $admin = new Admin();
-      $admin->create($request->all());
+      Admin::create($request->all());
 
       return redirect('/admin');
     }

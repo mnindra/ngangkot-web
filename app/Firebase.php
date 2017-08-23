@@ -9,32 +9,86 @@
 namespace App;
 use Firebase\FirebaseLib;
 
-class Firebase {
+abstract class Firebase {
 
   protected $firebase;
   protected $path;
-  protected $primaryKey;
+  protected $primaryKey = "id";
   protected $fillable;
 
   public function __construct() {
     $this->firebase = new FirebaseLib(env('databaseURL'), env('dbSecreat'));
-    $this->primaryKey = "id";
     $class = new \ReflectionClass($this);
     $this->path = "/" . strtolower($class->getShortName()) . "/";
   }
 
-  public function create($data) {
-    $input[$this->primaryKey] = uniqid();
+  public function getPrimaryKeyName() {
+    return $this->primaryKey;
+  }
 
+  public function getFillable() {
+    return $this->fillable;
+  }
+
+  public function getPath() {
+    return $this->path;
+  }
+
+  public function getFirebase() {
+    return $this->firebase;
+  }
+
+  public static function all() {
+    $path = with($instance = new static)->getPath();
+    $firebase = with($instance = new static)->getFirebase();
+    return json_decode($firebase->get($path));
+  }
+
+  public static function find($id) {
+    $path = with($instance = new static)->getPath();
+    $firebase = with($instance = new static)->getFirebase();
+    return json_decode($firebase->get($path . $id));
+  }
+
+  public static function create($data) {
+
+    $primaryKey = with($instance = new static)->getPrimaryKeyName();
+    $fillable = with($instance = new static)->getFillable();
+    $path = with($instance = new static)->getPath();
+    $firebase = with($instance = new static)->getFirebase();
+
+    $input[$primaryKey] = uniqid();
     foreach ($data as $key => $value) {
-      foreach ($this->fillable as $field) {
+      foreach ($fillable as $field) {
         if ($field == $key) {
           $input[$key] = $value;
         }
       }
     }
 
-    $path = $this->path . $input[$this->primaryKey];
-    $this->firebase->set($path, $input);
+    $firebase->set($path . $input[$primaryKey], $input);
+  }
+
+  public static function update($data, $id) {
+    $fillable = with($instance = new static)->getFillable();
+    $path = with($instance = new static)->getPath();
+    $firebase = with($instance = new static)->getFirebase();
+
+    $input = array();
+    foreach ($data as $key => $value) {
+      foreach ($fillable as $field) {
+        if ($field == $key) {
+          $input[$key] = $value;
+        }
+      }
+    }
+
+    $firebase->update($path . $id, $input);
+  }
+
+  public static function destroy($id) {
+    $path = with($instance = new static)->getPath();
+    $firebase = with($instance = new static)->getFirebase();
+    $firebase->delete($path . $id);
   }
 }
