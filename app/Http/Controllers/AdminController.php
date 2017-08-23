@@ -44,7 +44,7 @@ class AdminController extends Controller
       // validation
       $this->validate($request, [
         'nama' => 'required|min:4',
-        'username' => 'required|min:4|alpha_num',
+        'username' => 'required|min:4|alpha_num|firebase_unique:/admin',
         'password' => 'required|min:6|same:konfirmasi_password',
         'konfirmasi_password' => 'required',
         'telp' => 'required|numeric'
