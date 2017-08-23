@@ -14,3 +14,8 @@
 Route::get('/', function () {
     return view('template');
 });
+
+// Admin Route
+Route::get('/admin', 'AdminController@index');
+Route::get('/admin/tambah', 'AdminController@create');
+Route::post('/admin', 'AdminController@store');
