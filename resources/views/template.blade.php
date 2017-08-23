@@ -795,7 +795,16 @@
     <script src="{{ asset('js/admin.js') }}"></script>
 
     <!-- Demo Js -->
-    <script src="../../js/demo.js"></script>
+    <script src="{{ asset('js/demo.js') }}"></script>
+
+    <!-- Vue JS -->
+    <script src="https://unpkg.com/vue"></script>
+
+    <!-- Vue Resource -->
+    <script src="https://unpkg.com/vue-resource"></script>
+
+    <!-- Form Validation (use vue) -->
+    <script src="{{ asset('js/form-validation.js') }}"></script>
 </body>
 
 </html>

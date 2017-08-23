@@ -41,6 +41,19 @@ class AdminController extends Controller
      */
     public function store(Request $request)
     {
+      // validation
+      $this->validate($request, [
+        'nama' => 'required|min:4',
+        'username' => 'required|min:4|alpha_num',
+        'password' => 'required|min:6|same:konfirmasi_password',
+        'konfirmasi_password' => 'required',
+        'telp' => 'required|numeric'
+      ]);
+
+      // drop if its ajax
+      if ($request->ajax()) return;
+
+      // saving to firebase
       $id = uniqid();
       $path = "/admin/" . $id . "/";
       $data = array(
