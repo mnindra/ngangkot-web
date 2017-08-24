@@ -16,19 +16,19 @@
                         {{ method_field('put') }}
                         <div class="row clearfix">
                             <div class="col-sm-12">
-                                <div class="form-group form-float">
+                                <label>Nama</label>
+                                <div class="form-group">
                                     <div class="form-line">
-                                        <input type="text" class="form-control" name="nama" v-model="formInputs.nama">
-                                        <label class="form-label">Nama</label>
+                                        <input type="text" class="form-control" name="nama" v-model="formInputs.nama" placeholder="Masukkan Nama">
                                     </div>
                                     <div class="col-pink" v-if="formErrors['nama']">@{{ formErrors['nama'][0] }}</div>
                                 </div>
                             </div>
                             <div class="col-sm-12">
-                                <div class="form-group form-float">
+                                <label class="form-label">Telepon</label>
+                                <div class="form-group">
                                     <div class="form-line">
-                                        <input type="text" class="form-control" name="telp" v-model="formInputs.telp">
-                                        <label class="form-label">Telepon</label>
+                                        <input type="text" class="form-control" name="telp" v-model="formInputs.telp" placeholder="Masukkan Nomor Telepon">
                                     </div>
                                     <div class="col-pink" v-if="formErrors['telp']">@{{ formErrors['telp'][0] }}</div>
                                 </div>
