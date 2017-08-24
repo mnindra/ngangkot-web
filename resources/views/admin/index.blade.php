@@ -1,7 +1,7 @@
 @extends('template')
 
 @section('page')
-    <div class="row clearfix" id="app">
+    <div class="row clearfix" id="table" data-path="admin">
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
             <div class="card">
                 <div class="header">
@@ -13,26 +13,28 @@
 
                     <hr>
 
-                    <a href="{{ url('/admin/tambah') }}" class="btn btn-primary btn-lg waves-effect">
-                        <i class="material-icons">add_box</i>
-                        <span>Tambah</span>
-                    </a>
-
-                    <ul class="header-dropdown m-r--5">
-                        <li class="dropdown">
-                            <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                                <i class="material-icons">more_vert</i>
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2">
+                            <a href="{{ url('/admin/tambah') }}" class="btn btn-primary btn-lg waves-effect">
+                                <i class="material-icons">add_box</i>
+                                <span>Tambah</span>
                             </a>
-                            <ul class="dropdown-menu pull-right">
-                                <li><a href="javascript:void(0);" class=" waves-effect waves-block">Action</a></li>
-                                <li><a href="javascript:void(0);" class=" waves-effect waves-block">Another action</a></li>
-                                <li><a href="javascript:void(0);" class=" waves-effect waves-block">Something else here</a></li>
-                            </ul>
-                        </li>
-                    </ul>
+                        </div>
+                        <div class="col-xs-12 col-sm-12 col-md-5 col-lg-5">
+                            <div class="input-group">
+                                <span class="input-group-addon">
+                                    <i class="material-icons">search</i>
+                                </span>
+                                <div class="form-line">
+                                    <input type="text" class="form-control date" placeholder="Pencarian" v-model="search">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
                 <div class="body table-responsive">
-                    <table class="table">
+                    <table class="table" v-if="searchFilter.length > 0">
                         <thead>
                         <tr>
                             <th>#</th>
@@ -43,8 +45,8 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <tr v-for="(item, index) in admin">
-                            <td>@{{ index }}</td>
+                        <tr v-for="(item, index) in searchFilter">
+                            <td>@{{ index + 1 }}</td>
                             <td>@{{ item.nama }}</td>
                             <td>@{{ item.username }}</td>
                             <td>@{{ item.telp }}</td>
@@ -53,47 +55,22 @@
                                     Ubah
                                 </button>
 
-                                <button class="btn btn-danger waves-effect" v-on:click="deleteAdmin(index)">
+                                <button class="btn btn-danger waves-effect" v-on:click="destroy(item.id_admin)">
                                     Hapus
                                 </button>
                             </td>
                         </tr>
                         </tbody>
                     </table>
+
+                    <div v-if="searchFilter.length <= 0">
+                        <center>
+                            <h4 class="col-pink">DATA TIDAK DITEMUKAN</h4>
+                            <button class="btn btn-lg btn-primary waves-effect" v-on:click="search = ''">Reset</button>
+                        </center>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-@endsection
-
-@section('script')
-    <script>
-        new Vue({
-            'el': '#app',
-            'data': {
-                admin: []
-            },
-            'methods': {
-                'deleteAdmin': function (index) {
-                    $.ajax({
-                        'url': '/admin/' + index,
-                        'type': 'delete',
-                        'headers': {
-                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                        },
-                        'success': function (response) {
-                            console.log('admin deleted')
-                        }
-                    })
-                }
-            },
-            'mounted': function () {
-                var self = this;
-                var ref = database.ref('admin');
-                ref.on('value', function (snapshot) {
-                    self.admin = snapshot.val();
-                })
-            }
-        })
-    </script>
 @endsection

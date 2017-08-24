@@ -1,7 +1,7 @@
 @extends('template');
 
 @section('page')
-    <div class="row clearfix">
+    <div class="row clearfix" id="form-validation">
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
             <div class="card">
                 <div class="header">
@@ -10,7 +10,7 @@
                     </h2>
                 </div>
                 <div class="body">
-                    <form v-on:submit.prevent="submitForm" action="{{ url('/admin') }}" method="post" id="form-validation">
+                    <form v-on:submit.prevent="submitForm" action="{{ url('/admin') }}" method="post">
 
                         {{ csrf_field() }}
 

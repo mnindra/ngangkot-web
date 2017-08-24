@@ -27,6 +27,7 @@
 
     <!-- AdminBSB Themes. You can choose a theme from css/themes instead of get all themes -->
     <link href="{{ asset('css/all-themes.css') }}" rel="stylesheet" />
+
 </head>
 
 <body class="theme-blue">
@@ -798,6 +799,12 @@
     <!-- Demo Js -->
     <script src="{{ asset('js/demo.js') }}"></script>
 
+    <!-- Firebase -->
+    <script src="https://www.gstatic.com/firebasejs/4.3.0/firebase.js"></script>
+
+    <!-- Firebase Config -->
+    <script src="{{ asset('js/firebase_config.js') }}"></script>
+
     <!-- Vue JS -->
     <script src="https://unpkg.com/vue"></script>
 
@@ -807,11 +814,8 @@
     <!-- Form Validation (use vue) -->
     <script src="{{ asset('js/form-validation.js') }}"></script>
 
-    <!-- Firebase -->
-    <script src="https://www.gstatic.com/firebasejs/4.3.0/firebase.js"></script>
-
-    <!-- Firebase Config -->
-    <script src="{{ asset('js/firebase_config.js') }}"></script>
+    <!-- Table operation (use vue) -->
+    <script src="{{ asset('js/table.js') }}"></script>
 
     @yield('script');
 </body>
