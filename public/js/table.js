@@ -6,7 +6,7 @@ if(document.querySelector('#table')) {
             'list': [],
             'path': $('#table').attr('data-path'),
             'search': '',
-            'columns': ["nama", "username", "telp"]
+            'searchBy': $('#table').attr('data-searchBy')
         },
         'methods': {
             'destroy': function (id) {
@@ -44,7 +44,8 @@ if(document.querySelector('#table')) {
                 var self = this;
                 return this.list.filter(function(item) {
                     let search = self.search.toLowerCase();
-                    return item.nama.toLowerCase().indexOf(search) >= 0 || item.telp.toLowerCase().indexOf(search) >= 0;
+                    let searchBy = self.searchBy;
+                    return item[searchBy].toLowerCase().indexOf(search) >= 0;
                 });
             }
         }

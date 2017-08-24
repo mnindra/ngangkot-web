@@ -22,6 +22,15 @@
     <!-- Animation Css -->
     <link href="{{ asset('css/animate.css') }}" rel="stylesheet" />
 
+    <!-- Bootstrap Material Datetime Picker Css -->
+    <link href="{{ asset('css/bootstrap-material-datetimepicker.css') }}" rel="stylesheet" />
+
+    <!-- Wait Me Css -->
+    <link href="{{ asset('css/waitMe.css') }}" rel="stylesheet" />
+
+    <!-- Bootstrap Select Css -->
+    <link href="{{ asset('css/bootstrap-select.css') }}" rel="stylesheet" />
+
     <!-- Custom Css -->
     <link href="{{ asset('css/style.css') }}" rel="stylesheet">
 
