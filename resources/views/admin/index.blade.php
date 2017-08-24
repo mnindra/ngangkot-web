@@ -13,9 +13,9 @@
 
                     <hr>
 
-                    <div class="row">
+                    <div class="row clearfix">
                         <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2">
-                            <a href="{{ url('/admin/tambah') }}" class="btn btn-primary btn-lg waves-effect">
+                            <a href="{{ url('/admin/create') }}" class="btn btn-primary btn-lg waves-effect">
                                 <i class="material-icons">add_box</i>
                                 <span>Tambah</span>
                             </a>
@@ -34,10 +34,10 @@
 
                 </div>
                 <div class="body table-responsive">
-                    <table class="table" v-if="searchFilter.length > 0">
+                    <table id="hoho" class="table" v-if="searchFilter.length > 0">
                         <thead>
                         <tr>
-                            <th>#</th>
+                            <th>No</th>
                             <th>NAMA</th>
                             <th>USERNAME</th>
                             <th>TELEPON</th>
@@ -51,7 +51,7 @@
                             <td>@{{ item.username }}</td>
                             <td>@{{ item.telp }}</td>
                             <td>
-                                <button class="btn btn-warning waves-effect" v-on:click="deleteAdmin(index)">
+                                <button class="btn btn-warning waves-effect" v-on:click="edit(item.id_admin)">
                                     Ubah
                                 </button>
 

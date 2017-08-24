@@ -74,9 +74,11 @@ class AdminController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+
     public function edit($id)
     {
-        //
+      $data['id'] = $id;
+      return view('admin/edit', $data);
     }
 
     /**
@@ -88,7 +90,13 @@ class AdminController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+      $this->validate($request, [
+        'nama' => 'required|min:4',
+        'telp' => 'required|numeric'
+      ]);
+      if ($request->ajax()) return;
+      Admin::update($request->all(), $id);
+      return redirect('/admin');
     }
 
     /**
