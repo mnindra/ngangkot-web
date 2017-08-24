@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <meta name="csrf-token" content="{{ csrf_token() }}" />
     <title>Ngangkot Web Admin</title>
     <!-- Favicon-->
     <link rel="icon" href="../../favicon.ico" type="image/x-icon">
@@ -805,6 +806,14 @@
 
     <!-- Form Validation (use vue) -->
     <script src="{{ asset('js/form-validation.js') }}"></script>
+
+    <!-- Firebase -->
+    <script src="https://www.gstatic.com/firebasejs/4.3.0/firebase.js"></script>
+
+    <!-- Firebase Config -->
+    <script src="{{ asset('js/firebase_config.js') }}"></script>
+
+    @yield('script');
 </body>
 
 </html>

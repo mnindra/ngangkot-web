@@ -19,3 +19,4 @@ Route::get('/', function () {
 Route::get('/admin', 'AdminController@index');
 Route::get('/admin/tambah', 'AdminController@create');
 Route::post('/admin', 'AdminController@store');
+Route::delete('/admin/{id}', 'AdminController@destroy');

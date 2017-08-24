@@ -99,6 +99,6 @@ class AdminController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Admin::destroy($id);
     }
 }
