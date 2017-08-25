@@ -2,9 +2,8 @@
 
 namespace App;
 
-use Illuminate\Database\Eloquent\Model;
-
-class Penumpang extends Model
+class Penumpang extends Firebase
 {
-    //
+    protected $primaryKey = "id_penumpang";
+    protected $fillable = ["alamat", "foto", "jklm", "nama", "password", "telp", "username"];
 }
