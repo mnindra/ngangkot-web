@@ -14,6 +14,7 @@
 
                         {{ csrf_field() }}
                         {{ method_field('put') }}
+
                         <div class="row clearfix">
                             <div class="col-sm-12">
                                 <label>Nama</label>

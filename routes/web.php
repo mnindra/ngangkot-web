@@ -26,3 +26,7 @@ Route::put('/admin/{id}', 'AdminController@update');
 // Penumpang Route
 Route::get('/penumpang', 'PenumpangController@index');
 Route::delete('/penumpang/{id}', 'PenumpangController@destroy');
+
+// Pengemudi Route
+Route::get('/pengemudi', 'PengemudiController@index');
+Route::delete('/pengemudi/{id}', 'PengemudiController@destroy');
