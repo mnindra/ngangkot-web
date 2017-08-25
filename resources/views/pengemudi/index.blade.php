@@ -34,6 +34,7 @@
                                 <option value="nama">Nama</option>
                                 <option value="username">Username</option>
                                 <option value="alamat">Alamat</option>
+                                <option value="tanggal">Tanggal Daftar</option>
                                 <option value="telp">Telepon</option>
                             </select>
                         </div>
@@ -47,6 +48,7 @@
                             <th>NAMA</th>
                             <th>USERNAME</th>
                             <th>ALAMAT</th>
+                            <th>TANGGAL DAFTAR</th>
                             <th>TELEPON</th>
                             <th>ANGKUTAN</th>
                             <th>PILIHAN</th>
@@ -58,8 +60,9 @@
                             <td>@{{ item.nama }}</td>
                             <td>@{{ item.username }}</td>
                             <td>@{{ item.alamat }}</td>
+                            <td>@{{ item.tanggal }}</td>
                             <td>@{{ item.telp }}</td>
-                            <td><button class="btn btn-primary waves-effect">Lihat Angkutan</button></td>
+                            <td><button class="btn btn-primary waves-effect" data-toggle="modal" :data-target="'#defaultModal-'+item.id_pengemudi">Lihat Angkutan</button></td>
                             <td>
                                 <button class="btn btn-danger waves-effect" v-on:click="destroy(item.id_pengemudi)">
                                     Hapus
@@ -68,6 +71,34 @@
                         </tr>
                         </tbody>
                     </table>
+
+                    <div v-for="(item, index) in searchFilter">
+                        <div class="modal fade" :id="'defaultModal-'+item.id_pengemudi" tabindex="-1" role="dialog">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h4 class="modal-title" id="defaultModalLabel">Data Angkutan</h4>
+                                    </div>
+                                    <div class="modal-body col-lg-12">
+                                        <div class="col-lg-8">
+                                            <h4>Kode Rute</h4>
+                                            <h5>@{{ item.angkutan.id_rute }}</h5>
+                                            <hr>
+                                            <h4>Nomor Angkutan</h4>
+                                            <h5>@{{ item.angkutan.no_angkutan }}</h5>
+                                        </div>
+
+                                        <div class="col-lg-4">
+                                            <img class="media-object" src="http://placehold.it/64x64" width="100" height="100">
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-link waves-effect" data-dismiss="modal">CLOSE</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
                     <div v-if="searchFilter.length <= 0">
                         <center>

@@ -34,6 +34,7 @@
                                 <option value="nama">Nama</option>
                                 <option value="username">Username</option>
                                 <option value="alamat">Alamat</option>
+                                <option value="tanggal">Tanggal Daftar</option>
                                 <option value="telp">Telepon</option>
                             </select>
                         </div>
@@ -47,6 +48,7 @@
                             <th>NAMA</th>
                             <th>USERNAME</th>
                             <th>ALAMAT</th>
+                            <th>TANGGAL DAFTAR</th>
                             <th>TELEPON</th>
                             <th>PILIHAN</th>
                         </tr>
@@ -57,6 +59,7 @@
                             <td>@{{ item.nama }}</td>
                             <td>@{{ item.username }}</td>
                             <td>@{{ item.alamat }}</td>
+                            <td>@{{ item.tanggal }}</td>
                             <td>@{{ item.telp }}</td>
                             <td>
                                 <button class="btn btn-danger waves-effect" v-on:click="destroy(item.id_penumpang)">
