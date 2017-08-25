@@ -17,7 +17,7 @@ abstract class Firebase {
   protected $fillable;
 
   public function __construct() {
-    $this->firebase = new FirebaseLib(env('databaseURL'), env('dbSecreat'));
+    $this->firebase = new FirebaseLib(config('services.firebase.databaseURL'), config('services.firebase.dbSecreat'));
     $class = new \ReflectionClass($this);
     $this->path = "/" . strtolower($class->getShortName()) . "/";
   }
