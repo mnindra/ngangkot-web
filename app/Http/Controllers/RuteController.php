@@ -37,7 +37,7 @@ class RuteController extends Controller
     {
         // validation
         $this->validate($request, [
-            'id_rute' => 'required|min:2|firebase_unique:/rute',
+            'id_rute' => 'required|min:2|firebase_unique:rute',
             'keterangan' => 'required|min:6',
             'biaya' => 'required|numeric',
             'rute' => 'required'

@@ -17,11 +17,11 @@ class ValidatorServiceProvider extends ServiceProvider  {
   {
     $this->app['validator']->extend('firebase_unique', function ($attribute, $value, $parameters) {
       $path = $parameters[0];
-      $firebase = new FirebaseLib(env('databaseURL'), env('dbSecreat'));
+      $firebase = new FirebaseLib(config('services.firebase.databaseURL'), config('services.firebase.dbSecreat'));
       $data = json_decode($firebase->get($path));
       if (count($data) > 0) {
         foreach ($data as $row) {
-          if ($row->username == $value) return false;
+          if ($row->{$attribute} == $value) return false;
         }
       }
       return true;
