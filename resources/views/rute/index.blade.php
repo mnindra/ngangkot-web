@@ -13,6 +13,12 @@
                                 <small>Kumpulan data rute ngangkot</small>
                             </h2>
                         </div>
+                        <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2" align="right">
+                            <a href="{{ url('/rute/create') }}" class="btn btn-primary btn-lg waves-effect">
+                                <i class="material-icons">add_box</i>
+                                <span>Tambah</span>
+                            </a>
+                        </div>
                     </div>
                     <hr>
 
@@ -59,6 +65,10 @@
                             <td>@{{ item.biaya }}</td>
                             <td>@{{ item.rute }}</td>
                             <td>
+                                <button class="btn btn-warning waves-effect" v-on:click="edit(item.id_rute)">
+                                    Ubah
+                                </button>
+
                                 <button class="btn btn-danger waves-effect" v-on:click="destroy(item.id_rute)">
                                     Hapus
                                 </button>

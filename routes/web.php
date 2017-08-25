@@ -33,4 +33,8 @@ Route::delete('/pengemudi/{id}', 'PengemudiController@destroy');
 
 // Rute Route
 Route::get('/rute', 'RuteController@index');
+Route::get('/rute/create', 'RuteController@create');
+Route::post('/rute', 'RuteController@store');
 Route::delete('/rute/{id}', 'RuteController@destroy');
+Route::get('/rute/edit/{id}', 'RuteController@edit');
+Route::put('/rute/{id}', 'RuteController@update');

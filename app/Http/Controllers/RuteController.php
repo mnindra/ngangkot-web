@@ -24,7 +24,7 @@ class RuteController extends Controller
      */
     public function create()
     {
-        //
+        return view( 'rute/create');
     }
 
     /**
@@ -35,7 +35,21 @@ class RuteController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // validation
+        $this->validate($request, [
+            'id_rute' => 'required|min:2|firebase_unique:/rute',
+            'keterangan' => 'required|min:6',
+            'biaya' => 'required|numeric',
+            'rute' => 'required'
+        ]);
+
+        // drop if its ajax
+        if ($request->ajax()) return;
+
+        // save to firebase
+        Rute::create($request->all());
+
+        return redirect('/rute');
     }
 
     /**
@@ -57,7 +71,8 @@ class RuteController extends Controller
      */
     public function edit($id)
     {
-        //
+        $data['id'] = $id;
+        return view('rute/edit', $data);
     }
 
     /**
@@ -69,7 +84,14 @@ class RuteController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->validate($request, [
+            'keterangan' => 'required|min:6',
+            'biaya' => 'required|numeric',
+            'rute' => 'required'
+        ]);
+        if ($request->ajax()) return;
+        Rute::update($request->all(), $id);
+        return redirect('/rute');
     }
 
     /**
