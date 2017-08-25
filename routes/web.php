@@ -30,3 +30,7 @@ Route::delete('/penumpang/{id}', 'PenumpangController@destroy');
 // Pengemudi Route
 Route::get('/pengemudi', 'PengemudiController@index');
 Route::delete('/pengemudi/{id}', 'PengemudiController@destroy');
+
+// Rute Route
+Route::get('/rute', 'RuteController@index');
+Route::delete('/rute/{id}', 'RuteController@destroy');
