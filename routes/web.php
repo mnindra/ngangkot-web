@@ -22,3 +22,7 @@ Route::post('/admin', 'AdminController@store');
 Route::delete('/admin/{id}', 'AdminController@destroy');
 Route::get('/admin/edit/{id}', 'AdminController@edit');
 Route::put('/admin/{id}', 'AdminController@update');
+
+// Penumpang Route
+Route::get('/penumpang', 'PenumpangController@index');
+Route::delete('/penumpang/{id}', 'PenumpangController@destroy');
