@@ -61,7 +61,7 @@
                             <td>@{{ item.telp }}</td>
                             <td><button class="btn btn-primary waves-effect">Lihat Angkutan</button></td>
                             <td>
-                                <button class="btn btn-danger waves-effect" v-on:click="destroy(item.id_admin)">
+                                <button class="btn btn-danger waves-effect" v-on:click="destroy(item.id_pengemudi)">
                                     Hapus
                                 </button>
                             </td>
