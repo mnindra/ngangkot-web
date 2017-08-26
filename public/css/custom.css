@@ -1,0 +1,10 @@
+.gm-map {
+    display: block;
+    width: 100%;
+    height: 400px;
+}
+
+.gm-map-card {
+    overflow-y: scroll;
+    height: 335px;
+}

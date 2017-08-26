@@ -43,6 +43,9 @@ class RuteController extends Controller
             'rute' => 'required'
         ]);
 
+        // decode json rute
+        $request->merge(['rute' => json_decode($request->input('rute'))]);
+
         // drop if its ajax
         if ($request->ajax()) return;
 

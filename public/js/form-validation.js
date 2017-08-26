@@ -1,5 +1,5 @@
 if (document.querySelector('#form-validation')) {
-    new Vue({
+    var vue_formValidation = new Vue({
         'el': '#form-validation',
         'data': {
             'formInputs': {},

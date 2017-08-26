@@ -31,12 +31,14 @@
     <!-- Bootstrap Select Css -->
     <link href="{{ asset('css/bootstrap-select.css') }}" rel="stylesheet" />
 
-    <!-- Custom Css -->
+    <!-- Template Custom Css -->
     <link href="{{ asset('css/style.css') }}" rel="stylesheet">
 
     <!-- AdminBSB Themes. You can choose a theme from css/themes instead of get all themes -->
     <link href="{{ asset('css/all-themes.css') }}" rel="stylesheet" />
 
+    <!-- Ngangkot Custom Css -->
+    <link rel="stylesheet" href="{{ asset('css/custom.css') }}">
 </head>
 
 <body class="theme-blue">
@@ -827,6 +829,10 @@
     <script src="{{ asset('js/table.js') }}"></script>
 
     @yield('script');
+
+    <!-- Google Map API -->>
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB-0iUmT6UROU_Hx4RJtY32o2vSxS6PQS4&callback=initMap"></script>
+
 </body>
 
 </html>
