@@ -100,10 +100,29 @@
                         </div>
                     </div>
 
-                    <div v-if="searchFilter.length <= 0">
+                    <div v-if="searchFilter.length <= 0 && loading === false">
                         <center>
                             <h4 class="col-pink">DATA TIDAK DITEMUKAN</h4>
                             <button class="btn btn-lg btn-primary waves-effect" v-on:click="search = ''">Reset</button>
+                        </center>
+                    </div>
+
+                    <div v-if="loading !== false">
+                        <center>
+                            <h6 class="col-black">
+                                <div class="preloader pl-size-xs">
+                                    <div class="spinner-layer pl-red-grey">
+                                        <div class="circle-clipper left">
+                                            <div class="circle"></div>
+                                        </div>
+                                        <div class="circle-clipper right">
+                                            <div class="circle"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <br>
+                                Memuat Data...
+                            </h6>
                         </center>
                     </div>
                 </div>

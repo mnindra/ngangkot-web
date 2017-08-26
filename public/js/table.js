@@ -1,6 +1,7 @@
 if(document.querySelector('#table')) {
 
     var vue_table = new Vue({
+        'loading': true,
         'el': '#table',
         'data': {
             'list': [],
@@ -30,13 +31,14 @@ if(document.querySelector('#table')) {
             var self = this;
             var ref = database.ref(this.path);
             ref.on('value', snapshot => {
-
                 this.list = [];
+                this.loading = true;
                 Object.keys(snapshot.val()).forEach(key => {
                     // console.log(key);          // the name of the current key.
                     // console.log(snapshot.val()[key]);   // the value of the current key.
                     this.list.push(snapshot.val()[key]);
                 });
+                this.loading = false;
             })
         },
         'computed': {
