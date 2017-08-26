@@ -1,7 +1,7 @@
 @extends('template')
 
 @section('page')
-    <div class="row clearfix" id="table" data-path="rute" data-searchBy="rute">
+    <div class="row clearfix" id="table" data-path="rute" data-searchBy="id_rute">
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
             <div class="card">
                 <div class="header">
@@ -40,7 +40,6 @@
                                 <option value="id_rute">ID Rute</option>
                                 <option value="keterangan">Keterangan</option>
                                 <option value="biaya">Biaya</option>
-                                <option value="rute">Rute</option>
                             </select>
                         </div>
                     </div>
@@ -63,7 +62,7 @@
                             <td>@{{ item.id_rute }}</td>
                             <td>@{{ item.keterangan }}</td>
                             <td>@{{ item.biaya }}</td>
-                            <td>@{{ item.rute }}</td>
+                            <td><button type="button" class="btn btn-primary waves-effect">Lihat Rute</button></td>
                             <td>
                                 <button class="btn btn-warning waves-effect" v-on:click="edit(item.id_rute)">
                                     Ubah
