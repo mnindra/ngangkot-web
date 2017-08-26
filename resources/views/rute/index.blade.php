@@ -62,7 +62,7 @@
                             <td>@{{ item.id_rute }}</td>
                             <td>@{{ item.keterangan }}</td>
                             <td>@{{ item.biaya }}</td>
-                            <td><button type="button" class="btn btn-primary waves-effect">Lihat Rute</button></td>
+                            <td><button type="button" class="btn btn-primary waves-effect" v-on:click="lihat_rute(item.rute)">Lihat Rute</button></td>
                             <td>
                                 <button class="btn btn-warning waves-effect" v-on:click="edit(item.id_rute)">
                                     Ubah
@@ -85,5 +85,68 @@
                 </div>
             </div>
         </div>
+
+        {{-- MODEL LIHAT RUTE --}}
+        <div class="modal fade" id="lihat_rute" tabindex="-1" role="dialog" style="display: none;">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
+                                <div id="rute" class="gm-map"></div>
+                            </div>
+                            <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                                <div class="card">
+                                    <div class="header">
+                                        <h2>
+                                            Informasi Rute
+                                        </h2>
+                                    </div>
+                                    <div class="body gm-map-card">
+                                        <div id="panel_rute"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
+@endsection
+
+@section('script')
+
+    <script>
+        var map;
+        var directionsDisplay;
+
+        vue_table.lihat_rute = function (rute) {
+            directionsDisplay.setDirections(rute);
+            $('#lihat_rute').modal({
+                show: true
+            });
+
+            $('#lihat_rute').on('shown.bs.modal', function ()
+            {
+                google.maps.event.trigger(map, "resize");
+                map.fitBounds(rute.routes[0].bounds);
+                map.setZoom(14);
+            });
+        };
+
+        // inisialisasi map
+        function initMap() {
+            map = new google.maps.Map(document.getElementById('rute'), {
+                center: {lat: -7.9713294, lng: 112.6281746},
+                zoom: 14
+            });
+
+            directionsDisplay = new google.maps.DirectionsRenderer({
+                map: map,
+                panel: document.getElementById('panel_rute')
+            });
+        }
+    </script>
+
 @endsection

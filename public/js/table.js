@@ -1,6 +1,6 @@
 if(document.querySelector('#table')) {
 
-    new Vue({
+    var vue_table = new Vue({
         'el': '#table',
         'data': {
             'list': [],
