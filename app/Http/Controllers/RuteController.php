@@ -93,8 +93,12 @@ class RuteController extends Controller
             'rute' => 'required'
         ]);
         if ($request->ajax()) return;
-        Rute::update($request->all(), $id);
-        return redirect('/rute');
+
+      // decode json rute
+      $request->merge(['rute' => json_decode($request->input('rute'))]);
+
+      Rute::update($request->all(), $id);
+      return redirect('/rute');
     }
 
     /**

@@ -42,6 +42,11 @@ if (document.querySelector('#form-validation')) {
                 var path = $('#form-validation').attr('data-path');
                 database.ref(path + "/" + id).once('value').then(function (snapshot) {
                     self.formInputs = snapshot.val();
+
+                    // apabila ada data rute, maka load ke map
+                    if(self.formInputs.rute) {
+                        loadRoute(self.formInputs.rute);
+                    }
                 })
             }
         }

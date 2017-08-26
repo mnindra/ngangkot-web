@@ -35,12 +35,29 @@
                                 </div>
                             </div>
                             <div class="col-sm-12">
+
                                 <label class="form-label">Rute</label>
-                                <div class="form-group">
-                                    <div class="form-line">
-                                        <input type="text" class="form-control" name="rute" v-model="formInputs.rute" placeholder="Masukkan Nomor Rute">
+                                <div class="row">
+                                    <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
+                                        <div class="gm-map" id="rute"></div>
+                                        <div class="col-pink" v-if="formErrors['rute']">@{{ formErrors['rute'][0] }}</div>
+
+                                        <br>
+                                        <button class="btn btn-lg btn-primary btn-block waves-effect" type="button" id="setRute">Tentukan Rute</button>
+                                        <input type="hidden" name="rute" v-model="formInputs.rute">
                                     </div>
-                                    <div class="col-pink" v-if="formErrors['rute']">@{{ formErrors['rute'][0] }}</div>
+                                    <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                                        <div class="card">
+                                            <div class="header">
+                                                <h2>
+                                                    Informasi Rute
+                                                </h2>
+                                            </div>
+                                            <div class="body gm-map-card">
+                                                <div id="panel_rute"></div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                             <div class="col-sm-12">
@@ -61,4 +78,84 @@
             </div>
         </div>
     </div>
+@endsection
+
+@section('script')
+    <script>
+        var map;
+        var markers = [];
+        var directionsDisplay;
+        var directionsService;
+
+        // inisialisasi map
+        function initMap() {
+            map = new google.maps.Map(document.getElementById('rute'), {
+                center: {lat: -7.9713294, lng: 112.6281746},
+                zoom: 14
+            });
+
+            directionsDisplay = new google.maps.DirectionsRenderer({
+                draggable: true,
+                map: map,
+                panel: document.getElementById('panel_rute')
+            });
+            directionsService = new google.maps.DirectionsService();
+
+            google.maps.event.addListener(directionsDisplay, 'routeindex_changed', function() {
+                var rute = JSON.stringify(directionsDisplay.directions);
+                vue_formValidation.formInputs.rute = rute;
+                $('input[name="rute"]').val(rute);
+            });
+        }
+
+        function loadRoute(route) {
+            directionsDisplay.setDirections(route);
+        }
+
+        $(document).ready(function () {
+
+            google.maps.event.addListener(map, 'click', function(event) {
+                placeMarker(event.latLng);
+            });
+
+            // meletakkan marker
+            let i = 0;
+            function placeMarker(location) {
+
+                let title = ["awal", "tujuan"];
+
+                if(markers.length < 2) {
+                    var marker = new google.maps.Marker({
+                        position: location,
+                        map: map,
+                        draggable: true,
+                        title: title[i++],
+                        animation: google.maps.Animation.DROP,
+                    });
+                    markers.push(marker);
+                }
+            }
+
+            // menentukan rute
+            $('#setRute').click(function () {
+                var request = {
+                    origin: markers[0].position,
+                    destination: markers[1].position,
+                    travelMode: 'DRIVING'
+                };
+
+                directionsService.route(request, function (result, status) {
+                    if(status == "OK") {
+                        directionsDisplay.setDirections(result);
+                        markers.forEach(function (marker) {
+                            marker.setMap(null);
+                        });
+                        markers = [];
+//                       console.log('direction : ' + JSON.stringify(result));
+                    }
+                });
+            });
+
+        });
+    </script>
 @endsection
