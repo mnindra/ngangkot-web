@@ -64,8 +64,8 @@
                             <td>@{{ item.tanggal }}</td>
                             <td>@{{ item.telp }}</td>
                             <td>
-                                <span v-if=" item.blokir == false">Tidak di Blokir</span>
-                                <span v-else>Di Blokir</span>
+                                <span v-if="item.blokir == true" class="col-red">diblokir</span>
+                                <span v-if="item.blokir == false">tidak diblokir</span>
                             </td>
                             <td>
                                 <button class="btn btn-primary waves-effect" v-on:click="lihat_penumpang(item.id_penumpang)">
@@ -73,15 +73,15 @@
                                 </button>
                             </td>
                             <td>
-                                <button v-if=" item.blokir == false" class="btn btn-danger waves-effect" v-on:click="destroy(item.id_penumpang)">
+                                <button v-if="item.blokir == false" class="btn btn-danger waves-effect" v-on:click="blokir(item.id_penumpang)">
                                     Blokir
                                 </button>
-                                <button v-if="item.blokir == true" class="btn btn-danger waves-effect" v-on:click="destroy(item.id_penumpang)">
-                                    UnBlokir
+
+                                <button v-if="item.blokir == true" class="btn btn-primary waves-effect" v-on:click="unblokir(item.id_penumpang)">
+                                    Jangan Blokir
                                 </button>
-                            </td>
-                            <td>
-                                <button class="btn btn-danger waves-effect" v-on:click="destroy(item.id_penumpang)">
+
+                                <button class="btn btn-danger waves-effect" v-on:click="destroy(item.id_penumpang); hapus_foto(item.id_penumpang);">
                                     Hapus
                                 </button>
                             </td>
@@ -137,21 +137,56 @@
 @section('script')
     <script>
         vue_table.lihat_penumpang = function (id_penumpang) {
-            storage.ref('penumpang/' + id_penumpang + '/penumpang.jpg').getDownloadURL().then(function (url) {
+            storage.ref('penumpang/' + id_penumpang + '.jpg').getDownloadURL().then(function (url) {
                 $('#foto_penumpang').attr('src', url);
+            }).catch(function (error) {
+                $('#foto_penumpang').attr('src', 'http://via.placeholder.com/600x480');
             });
 
             $('#lihat_penumpang').modal({
                 show: true
             });
-        }
+        };
+
+        vue_table.hapus_foto = function (id_penumpang) {
+
+            storage.ref('penumpang/' + id_penumpang + ".jpg").delete().then(function () {
+                console.log('foto penumpang terhapus');
+            }).catch(function (error) {
+                console.log('foto penumpang gagal dihapus');
+            });
+        };
 
         vue_table.blokir = function (id_penumpang) {
-            $.ajax({
-                'url': '',
-                'type': 'put',
+          $.ajax({
+              url: '/penumpang/' + id_penumpang,
+              type: 'put',
+              headers: {
+                  'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+              },
+              data: {
+                  'blokir': 1
+              },
+              success: function () {
+                  console.log('penumpang diblokir')
+              }
+          });
+        };
 
-            })
-        }
+        vue_table.unblokir = function (id_penumpang) {
+            $.ajax({
+                url: '/penumpang/' + id_penumpang,
+                type: 'put',
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                data: {
+                    'blokir': 0
+                },
+                success: function () {
+                    console.log('penumpang di unblokir')
+                }
+            });
+        };
     </script>
 @endsection

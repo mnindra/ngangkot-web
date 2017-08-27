@@ -14,6 +14,7 @@ class Pengemudi extends Firebase
       "nama",
       "password",
       "telp",
-      "username"
+      "username",
+      "blokir"
     ];
 }

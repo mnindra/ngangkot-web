@@ -69,7 +69,7 @@ class PengemudiController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+      Pengemudi::update($request->all(), $id);
     }
 
     /**

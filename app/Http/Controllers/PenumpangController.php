@@ -69,7 +69,7 @@ class PenumpangController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        Penumpang::update($request->all(), $id);
     }
 
     /**
