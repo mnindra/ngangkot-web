@@ -40,3 +40,6 @@ Route::post('/rute', 'RuteController@store');
 Route::delete('/rute/{id}', 'RuteController@destroy');
 Route::get('/rute/edit/{id}', 'RuteController@edit');
 Route::put('/rute/{id}', 'RuteController@update');
+
+// Login Route
+Route::get('/login', 'LoginController@index');

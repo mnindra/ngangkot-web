@@ -819,6 +819,9 @@
     <!-- Firebase Config -->
     <script src="{{ asset('js/firebase_config.js') }}"></script>
 
+    <!-- Firebase Auth -->
+    <script src="{{ asset('js/firebase_auth.js') }}"></script>
+
     <!-- Vue JS -->
     <script src="https://unpkg.com/vue"></script>
 
