@@ -50,6 +50,7 @@
                             <th>ALAMAT</th>
                             <th>TANGGAL DAFTAR</th>
                             <th>TELEPON</th>
+                            <th>FOTO PENUMPANG</th>
                             <th>PILIHAN</th>
                         </tr>
                         </thead>
@@ -61,6 +62,11 @@
                             <td>@{{ item.alamat }}</td>
                             <td>@{{ item.tanggal }}</td>
                             <td>@{{ item.telp }}</td>
+                            <td>
+                                <button class="btn btn-primary waves-effect" v-on:click="lihat_penumpang(item.id_penumpang)">
+                                    Lihat Foto
+                                </button>
+                            </td>
                             <td>
                                 <button class="btn btn-danger waves-effect" v-on:click="destroy(item.id_penumpang)">
                                     Hapus
@@ -98,5 +104,33 @@
                 </div>
             </div>
         </div>
+
+        {{-- MODAL LIHAT PENUMPANG --}}
+        <div class="modal fade" id="lihat_penumpang" tabindex="-1" role="dialog">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-body col-lg-12">
+                        <img class="media-object img-responsive thumbnail" id="foto_penumpang" src="">
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-link waves-effect" data-dismiss="modal">TUTUP</button>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
+@endsection
+
+@section('script')
+    <script>
+        vue_table.lihat_penumpang = function (id_penumpang) {
+            storage.ref('penumpang/' + id_penumpang + '/penumpang.jpg').getDownloadURL().then(function (url) {
+                $('#foto_penumpang').attr('src', url);
+            });
+
+            $('#lihat_penumpang').modal({
+                show: true
+            });
+        }
+    </script>
 @endsection
