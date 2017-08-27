@@ -63,8 +63,20 @@
                             <td>@{{ item.alamat }}</td>
                             <td>@{{ item.tanggal }}</td>
                             <td>@{{ item.telp }}</td>
+                            <td>
+                                <span v-if=" item.blokir == false">Tidak di Blokir</span>
+                                <span v-else>Di Blokir</span>
+                            </td>
                             <td><button class="btn btn-primary waves-effect" v-on:click="lihat_pengemudi(item)">Lihat Foto</button></td>
                             <td><button class="btn btn-primary waves-effect" v-on:click="lihat_angkutan(item)">Lihat Angkutan</button></td>
+                            <td>
+                                <button v-if=" item.blokir == false" class="btn btn-danger waves-effect" v-on:click="destroy(item.id_penumpang)">
+                                    Blokir
+                                </button>
+                                <button v-if="item.blokir == true" class="btn btn-danger waves-effect" v-on:click="destroy(item.id_penumpang)">
+                                    UnBlokir
+                                </button>
+                            </td>
                             <td>
                                 <button class="btn btn-danger waves-effect" v-on:click="destroy(item.id_pengemudi)">
                                     Hapus

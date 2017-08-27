@@ -50,6 +50,7 @@
                             <th>ALAMAT</th>
                             <th>TANGGAL DAFTAR</th>
                             <th>TELEPON</th>
+                            <th>STATUS</th>
                             <th>FOTO PENUMPANG</th>
                             <th>PILIHAN</th>
                         </tr>
@@ -63,8 +64,20 @@
                             <td>@{{ item.tanggal }}</td>
                             <td>@{{ item.telp }}</td>
                             <td>
+                                <span v-if=" item.blokir == false">Tidak di Blokir</span>
+                                <span v-else>Di Blokir</span>
+                            </td>
+                            <td>
                                 <button class="btn btn-primary waves-effect" v-on:click="lihat_penumpang(item.id_penumpang)">
                                     Lihat Foto
+                                </button>
+                            </td>
+                            <td>
+                                <button v-if=" item.blokir == false" class="btn btn-danger waves-effect" v-on:click="destroy(item.id_penumpang)">
+                                    Blokir
+                                </button>
+                                <button v-if="item.blokir == true" class="btn btn-danger waves-effect" v-on:click="destroy(item.id_penumpang)">
+                                    UnBlokir
                                 </button>
                             </td>
                             <td>
@@ -131,6 +144,14 @@
             $('#lihat_penumpang').modal({
                 show: true
             });
+        }
+
+        vue_table.blokir = function (id_penumpang) {
+            $.ajax({
+                'url': '',
+                'type': 'put',
+
+            })
         }
     </script>
 @endsection
