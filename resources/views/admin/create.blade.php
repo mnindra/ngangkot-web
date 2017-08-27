@@ -10,7 +10,7 @@
                     </h2>
                 </div>
                 <div class="body">
-                    <form v-on:submit.prevent="submitForm" action="{{ url('/admin') }}" method="post">
+                    <form v-on:submit.prevent="create_auth" action="{{ url('/admin') }}" method="post">
 
                         {{ csrf_field() }}
 
@@ -25,12 +25,12 @@
                                 </div>
                             </div>
                             <div class="col-sm-12">
-                                <label class="form-label">Username</label>
+                                <label class="form-label">Email</label>
                                 <div class="form-group">
                                     <div class="form-line">
-                                        <input type="text" class="form-control" name="username" v-model="formInputs.username" placeholder="Masukkan Username">
+                                        <input type="email" class="form-control" name="email" v-model="formInputs.email" placeholder="Masukkan Email">
                                     </div>
-                                    <div class="col-pink" v-if="formErrors['username']">@{{ formErrors['username'][0] }}</div>
+                                    <div class="col-pink" v-if="formErrors['email']">@{{ formErrors['email'][0] }}</div>
                                 </div>
                             </div>
                             <div class="col-sm-12">
@@ -78,4 +78,38 @@
             </div>
         </div>
     </div>
+@endsection
+
+@section('script')
+    <script>
+        vue_formValidation.create_auth = function (e) {
+            var self = this;
+            var form = e.srcElement;
+            var action = form.action;
+            var csrfToken = form.querySelector('input[name="_token"]').value;
+            var method = form.querySelector('input[name="_method"]') ? form.querySelector('input[name="_method"]').value : "post";
+
+            console.log(method);
+
+            $.ajax({
+                'type': method,
+                'headers': {
+                    'X-CSRF-TOKEN': csrfToken
+                },
+                'url': action,
+                'data': this.formInputs,
+                'success': function () {
+                    auth2.createUserWithEmailAndPassword(self.formInputs.email, self.formInputs.password).then(function() {
+                        form.submit();
+                    });
+                },
+                'error': function (xhr, status, error) {
+                    var errors = JSON.parse(xhr.responseText);
+                    self.formErrors = errors;
+                    self.formInputs.password = "";
+                    self.formInputs.konfirmasi_password = "";
+                }
+            });
+        }
+    </script>
 @endsection

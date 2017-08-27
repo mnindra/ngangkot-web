@@ -1,13 +1,13 @@
 if(document.querySelector('#table')) {
 
     var vue_table = new Vue({
-        'loading': true,
         'el': '#table',
         'data': {
             'list': [],
             'path': $('#table').attr('data-path'),
             'search': '',
-            'searchBy': $('#table').attr('data-searchBy')
+            'searchBy': $('#table').attr('data-searchBy'),
+            'loading': true
         },
         'methods': {
             'destroy': function (id) {

@@ -50,7 +50,7 @@
                         <tr>
                             <th>No</th>
                             <th>NAMA</th>
-                            <th>USERNAME</th>
+                            <th>EMAIL</th>
                             <th>TELEPON</th>
                             <th>PILIHAN</th>
                         </tr>
@@ -59,7 +59,7 @@
                         <tr v-for="(item, index) in searchFilter">
                             <td>@{{ index + 1 }}</td>
                             <td>@{{ item.nama }}</td>
-                            <td>@{{ item.username }}</td>
+                            <td>@{{ item.email }}</td>
                             <td>@{{ item.telp }}</td>
                             <td>
                                 <div class="btn-group" role="group">
@@ -67,7 +67,7 @@
                                         <i class="material-icons">edit</i>
                                     </button>
 
-                                    <button class="btn bg-red waves-effect" v-on:click="destroy(item.id_admin)" data-toggle="tooltip" data-placement="top" title="Hapus">
+                                    <button class="btn bg-red waves-effect" v-on:click="destroy(item.id_admin); destroy_auth(item);" data-toggle="tooltip" data-placement="top" title="Hapus">
                                         <i class="material-icons">delete</i>
                                     </button>
                                 </div>
@@ -105,4 +105,17 @@
             </div>
         </div>
     </div>
+@endsection
+
+@section('script')
+    <script>
+        vue_table.destroy_auth = function (item) {
+            auth2.signInWithEmailAndPassword(item.email, item.password).then(function () {
+               auth2.currentUser.delete().then(function () {
+                   auth2.signOut();
+                   console.log('auth deleted');
+               });
+            });
+        }
+    </script>
 @endsection

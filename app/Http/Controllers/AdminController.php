@@ -39,7 +39,7 @@ class AdminController extends Controller
       // validation
       $this->validate($request, [
         'nama' => 'required|min:4',
-        'username' => 'required|min:4|alpha_num|firebase_unique:admin',
+        'email' => 'required|email|firebase_unique:admin',
         'password' => 'required|min:6|same:konfirmasi_password',
         'konfirmasi_password' => 'required',
         'telp' => 'required|numeric'
@@ -47,9 +47,6 @@ class AdminController extends Controller
 
       // drop if its ajax
       if ($request->ajax()) return;
-
-      // encrypt password
-      $request->merge(['password' => md5($request->input('password'))]);
 
       // save to firebase
       Admin::create($request->all());
