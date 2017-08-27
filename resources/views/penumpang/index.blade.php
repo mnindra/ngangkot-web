@@ -68,7 +68,7 @@
                                 </button>
                             </td>
                             <td>
-                                <button class="btn btn-danger waves-effect" v-on:click="destroy(item.id_penumpang)">
+                                <button class="btn btn-danger waves-effect" v-on:click="destroy(item.id_penumpang); hapus_foto(item.id_penumpang);">
                                     Hapus
                                 </button>
                             </td>
@@ -124,7 +124,7 @@
 @section('script')
     <script>
         vue_table.lihat_penumpang = function (id_penumpang) {
-            storage.ref('penumpang/' + id_penumpang + '/penumpang.jpg').getDownloadURL().then(function (url) {
+            storage.ref('penumpang/' + id_penumpang + '.jpg').getDownloadURL().then(function (url) {
                 $('#foto_penumpang').attr('src', url);
             }).catch(function (error) {
                 $('#foto_penumpang').attr('src', 'http://via.placeholder.com/600x480');
@@ -132,6 +132,15 @@
 
             $('#lihat_penumpang').modal({
                 show: true
+            });
+        };
+
+        vue_table.hapus_foto = function (id_penumpang) {
+
+            storage.ref('penumpang/' + id_penumpang + ".jpg").delete().then(function () {
+                console.log('foto penumpang terhapus');
+            }).catch(function (error) {
+                console.log('foto penumpang gagal dihapus');
             });
         }
     </script>

@@ -63,10 +63,10 @@
                             <td>@{{ item.alamat }}</td>
                             <td>@{{ item.tanggal }}</td>
                             <td>@{{ item.telp }}</td>
-                            <td><button class="btn btn-primary waves-effect" v-on:click="lihat_pengemudi(item)">Lihat Foto</button></td>
-                            <td><button class="btn btn-primary waves-effect" v-on:click="lihat_angkutan(item)">Lihat Angkutan</button></td>
+                            <td><button class="btn btn-primary waves-effect" v-on:click="lihat_pengemudi(item.id_pengemudi)">Lihat Foto</button></td>
+                            <td><button class="btn btn-primary waves-effect" v-on:click="lihat_angkutan(item.angkutan)">Lihat Angkutan</button></td>
                             <td>
-                                <button class="btn btn-danger waves-effect" v-on:click="destroy(item.id_pengemudi)">
+                                <button class="btn btn-danger waves-effect" v-on:click="destroy(item.id_pengemudi); hapus_foto(item.id_pengemudi, item.angkutan.no_angkutan);">
                                     Hapus
                                 </button>
                             </td>
@@ -148,16 +148,15 @@
 
 @section('script')
     <script>
-        vue_table.lihat_angkutan = function (item) {
+        vue_table.lihat_angkutan = function (angkutan) {
 
-            var id_pengemudi = item.id_pengemudi;
-            var id_rute = item.angkutan.id_rute;
-            var no_angkutan = item.angkutan.no_angkutan;
+            var id_rute = angkutan.id_rute;
+            var no_angkutan = angkutan.no_angkutan;
 
             $('#id_rute').html(id_rute);
             $('#no_angkutan').html(no_angkutan);
 
-            storage.ref('pengemudi/' + id_pengemudi + '/angkutan.jpg').getDownloadURL().then(function (url) {
+            storage.ref('angkutan/' + no_angkutan + '.jpg').getDownloadURL().then(function (url) {
                 $('#foto_angkutan').attr('src', url);
             }).catch(function (error) {
                 $('#foto_angkutan').attr('src', 'http://via.placeholder.com/100x100');
@@ -168,9 +167,8 @@
             });
         }
         
-        vue_table.lihat_pengemudi = function (item) {
-            var id_pengemudi = item.id_pengemudi;
-            storage.ref('pengemudi/' + id_pengemudi + '/pengemudi.jpg').getDownloadURL().then(function (url) {
+        vue_table.lihat_pengemudi = function (id_pengemudi) {
+            storage.ref('pengemudi/' + id_pengemudi + '.jpg').getDownloadURL().then(function (url) {
                 $('#foto_pengemudi').attr('src', url);
             }).catch(function (error) {
                 $('#foto_pengemudi').attr('src', 'http://via.placeholder.com/600x480');
@@ -178,6 +176,21 @@
 
             $('#lihat_pengemudi').modal({
                 show: true
+            });
+        }
+        
+        vue_table.hapus_foto = function (id_pengemudi, no_angkutan) {
+
+            storage.ref('pengemudi/' + id_pengemudi + ".jpg").delete().then(function () {
+                console.log('foto pengemudi terhapus');
+            }).catch(function (error) {
+                console.log('foto pengemudi gagal dihapus');
+            });
+
+            storage.ref('angkutan/' + no_angkutan + ".jpg").delete().then(function () {
+                console.log('foto angkutan terhapus');
+            }).catch(function (error) {
+                console.log('foto angkutan gagal dihapus');
             });
         }
     </script>
