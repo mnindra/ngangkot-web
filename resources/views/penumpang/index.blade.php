@@ -82,7 +82,7 @@
                                         <i class="material-icons">check</i>
                                     </button>
 
-                                    <button type="button" class="btn bg-red waves-effect" v-on:click="destroy(item.id_penumpang); hapus_foto(item.id_penumpang);" data-toggle="tooltip" data-placement="top" title="Hapus">
+                                    <button type="button" class="btn bg-red waves-effect" v-on:click="destroy(item.id_penumpang); hapus_foto(item.id_penumpang); destroy_auth(item)" data-toggle="tooltip" data-placement="top" title="Hapus">
                                         <i class="material-icons">delete</i>
                                     </button>
                                 </div>
@@ -190,5 +190,14 @@
                 }
             });
         };
+
+        vue_table.destroy_auth = function (item) {
+            auth2.signInWithEmailAndPassword(item.email, item.password).then(function () {
+                auth2.currentUser.delete().then(function () {
+                    auth2.signOut();
+                    console.log('auth deleted');
+                });
+            });
+        }
     </script>
 @endsection

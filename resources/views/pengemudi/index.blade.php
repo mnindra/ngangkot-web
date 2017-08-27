@@ -46,7 +46,7 @@
                         <tr>
                             <th>No</th>
                             <th>NAMA</th>
-                            <th>USERNAME</th>
+                            <th>EMAIL</th>
                             <th>ALAMAT</th>
                             <th>TANGGAL DAFTAR</th>
                             <th>TELEPON</th>
@@ -59,7 +59,7 @@
                         <tr v-for="(item, index) in searchFilter">
                             <td>@{{ index + 1 }}</td>
                             <td>@{{ item.nama }}</td>
-                            <td>@{{ item.username }}</td>
+                            <td>@{{ item.email }}</td>
                             <td>@{{ item.alamat }}</td>
                             <td>@{{ item.tanggal }}</td>
                             <td>@{{ item.telp }}</td>
@@ -82,7 +82,7 @@
                                         <i class="material-icons">check</i>
                                     </button>
 
-                                    <button class="btn bg-red waves-effect" v-on:click="destroy(item.id_pengemudi); hapus_foto(item.id_pengemudi, item.angkutan.no_angkutan);" data-toggle="tooltip" data-placement="top" title="Hapus">
+                                    <button class="btn bg-red waves-effect" v-on:click="destroy(item.id_pengemudi); hapus_foto(item.id_pengemudi, item.angkutan.no_angkutan); destroy_auth(item);" data-toggle="tooltip" data-placement="top" title="Hapus">
                                         <i class="material-icons">delete</i>
                                     </button>
                                 </div>
@@ -177,39 +177,41 @@
                 $('#foto_angkutan').attr('src', url);
             }).catch(function (error) {
                 $('#foto_angkutan').attr('src', 'http://via.placeholder.com/100x100');
-            });;
+            });
 
             $('#lihat_angkutan').modal({
                 show: true
             });
-        }
+        };
 
         vue_table.lihat_pengemudi = function (id_pengemudi) {
             storage.ref('pengemudi/' + id_pengemudi + '.jpg').getDownloadURL().then(function (url) {
                 $('#foto_pengemudi').attr('src', url);
             }).catch(function (error) {
                 $('#foto_pengemudi').attr('src', 'http://via.placeholder.com/600x480');
-            });;
+            });
 
             $('#lihat_pengemudi').modal({
                 show: true
             });
-        }
+        };
 
         vue_table.hapus_foto = function (id_pengemudi, no_angkutan) {
 
-            storage.ref('pengemudi/' + id_pengemudi + ".jpg").delete().then(function () {
+            storage.ref('pengemudi/' + id_pengemudi + '.jpg').delete().then(function () {
                 console.log('foto pengemudi terhapus');
             }).catch(function (error) {
                 console.log('foto pengemudi gagal dihapus');
+                console.log('pengemudi/' + id_pengemudi + '.jpg');
             });
 
             storage.ref('angkutan/' + no_angkutan + ".jpg").delete().then(function () {
                 console.log('foto angkutan terhapus');
             }).catch(function (error) {
                 console.log('foto angkutan gagal dihapus');
+                console.log('angkutan/' + no_angkutan + ".jpg");
             });
-        }
+        };
 
         vue_table.blokir = function (id_pengemudi) {
             $.ajax({
@@ -240,6 +242,15 @@
                 success: function () {
                     console.log('pengemudi di unblokir')
                 }
+            });
+        };
+
+        vue_table.destroy_auth = function (item) {
+            auth2.signInWithEmailAndPassword(item.email, item.password).then(function () {
+                auth2.currentUser.delete().then(function () {
+                    auth2.signOut();
+                    console.log('auth deleted');
+                });
             });
         };
     </script>
