@@ -347,12 +347,6 @@
                             </li>
                         </ul>
                     </li>
-                    <li>
-                        <a href="/testimoni">
-                            <i class="material-icons">thumb_up</i>
-                            <span>Testimoni</span>
-                        </a>
-                    </li>
                     {{--<li>--}}
                         {{--<a href="javascript:void(0);" class="menu-toggle">--}}
                             {{--<i class="material-icons">swap_calls</i>--}}
