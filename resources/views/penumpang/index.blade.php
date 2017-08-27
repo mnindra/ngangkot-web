@@ -78,7 +78,7 @@
                                         <i class="material-icons">block</i>
                                     </button>
 
-                                    <button v-if="item.blokir == true" class="btn bg-green waves-effect" v-on:click="unblokir(item.id_penumpang)" data-toggle="tooltip" data-placement="top" title="Hapus Blokir">
+                                    <button v-if="item.blokir == true" class="btn bg-light-green waves-effect" v-on:click="unblokir(item.id_penumpang)" data-toggle="tooltip" data-placement="top" title="Hapus Blokir">
                                         <i class="material-icons">check</i>
                                     </button>
 
