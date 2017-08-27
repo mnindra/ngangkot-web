@@ -50,6 +50,7 @@
                             <th>ALAMAT</th>
                             <th>TANGGAL DAFTAR</th>
                             <th>TELEPON</th>
+                            <th>STATUS</th>
                             <th>FOTO PENGEMUDI</th>
                             <th>ANGKUTAN</th>
                             <th>PILIHAN</th>
