@@ -89,7 +89,7 @@
         var email = $('input[name="email"]').val();
         var password = $('input[name="password"]').val();
         auth.signInWithEmailAndPassword(email, password).then(function () {
-            window.location = '/';
+
         }).catch(function(error) {
             window.location = '/login';
         });
@@ -97,7 +97,22 @@
 
     auth.onAuthStateChanged(function(user) {
         if (user) {
-            window.location = '/';
+            database.ref('admin').once('value').then(function(snapshot) {
+                var success = false;
+                var email = auth.currentUser.email;
+                for (var index in snapshot.val()) {
+                    if (snapshot.val()[index].email == email) {
+                        success = true;
+                    }
+                }
+
+                if(success) {
+                    window.location = '/';
+                } else {
+                    auth.signOut();
+                    window.location = '/login';
+                }
+            });
         }
     });
 </script>
