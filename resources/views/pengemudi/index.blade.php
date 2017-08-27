@@ -32,7 +32,7 @@
                             <label for="">Cari Berdasarkan</label>
                             <select class="form-control" v-model="searchBy">
                                 <option value="nama">Nama</option>
-                                <option value="username">Username</option>
+                                <option value="email">Email</option>
                                 <option value="alamat">Alamat</option>
                                 <option value="tanggal">Tanggal Daftar</option>
                                 <option value="telp">Telepon</option>
