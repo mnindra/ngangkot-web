@@ -804,6 +804,9 @@
     <!-- Waves Effect Plugin Js -->
     <script src="{{ asset('js/waves.js') }}"></script>
 
+    <!-- Tooltip JS -->
+    <script src="{{ asset('js/tooltips-popovers.js') }}"></script>
+
     <!-- Custom Js -->
     <script src="{{ asset('js/admin.js') }}"></script>
 

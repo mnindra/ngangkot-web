@@ -52,7 +52,6 @@
                             <th>TELEPON</th>
                             <th>STATUS</th>
                             <th>FOTO PENGEMUDI</th>
-                            <th>ANGKUTAN</th>
                             <th>PILIHAN</th>
                         </tr>
                         </thead>
@@ -69,19 +68,24 @@
                                 <span v-if="item.blokir == false">tidak diblokir</span>
                             </td>
                             <td><button class="btn btn-primary waves-effect" v-on:click="lihat_pengemudi(item.id_pengemudi)">Lihat Foto</button></td>
-                            <td><button class="btn btn-primary waves-effect" v-on:click="lihat_angkutan(item.angkutan)">Lihat Angkutan</button></td>
                             <td>
-                                <button v-if="item.blokir == false" class="btn btn-danger waves-effect" v-on:click="blokir(item.id_pengemudi)">
-                                    Blokir
-                                </button>
+                                <div class="btn-group" role="group">
+                                    <button class="btn btn-primary waves-effect" v-on:click="lihat_angkutan(item.angkutan)" data-toggle="tooltip" data-placement="top" title="Lihat Angkutan">
+                                        <i class="material-icons">directions_car</i>
+                                    </button>
 
-                                <button v-if="item.blokir == true" class="btn btn-primary waves-effect" v-on:click="unblokir(item.id_pengemudi)">
-                                    Jangan Blokir
-                                </button>
+                                    <button v-if="item.blokir == false" class="btn bg-red waves-effect" v-on:click="blokir(item.id_pengemudi)" data-toggle="tooltip" data-placement="top" title="Blokir">
+                                        <i class="material-icons">block</i>
+                                    </button>
 
-                                <button class="btn btn-danger waves-effect" v-on:click="destroy(item.id_pengemudi); hapus_foto(item.id_pengemudi, item.angkutan.no_angkutan);">
-                                    Hapus
-                                </button>
+                                    <button v-if="item.blokir == true" class="btn bg-green waves-effect" v-on:click="unblokir(item.id_pengemudi)" data-toggle="tooltip" data-placement="top" title="Hapus Blokir">
+                                        <i class="material-icons">check</i>
+                                    </button>
+
+                                    <button class="btn bg-red waves-effect" v-on:click="destroy(item.id_pengemudi); hapus_foto(item.id_pengemudi, item.angkutan.no_angkutan);" data-toggle="tooltip" data-placement="top" title="Hapus">
+                                        <i class="material-icons">delete</i>
+                                    </button>
+                                </div>
                             </td>
                         </tr>
                         </tbody>

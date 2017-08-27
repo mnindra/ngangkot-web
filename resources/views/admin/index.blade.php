@@ -13,16 +13,16 @@
                                 <small>Kumpulan data admin web ngangkot</small>
                             </h2>
                         </div>
-                        <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2" align="right">
+                    </div>
+                    <hr>
+
+                    <div class="row clearfix">
+                        <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2">
                             <a href="{{ url('/admin/create') }}" class="btn btn-primary btn-lg waves-effect">
                                 <i class="material-icons">add_box</i>
                                 <span>Tambah</span>
                             </a>
                         </div>
-                    </div>
-                    <hr>
-
-                    <div class="row clearfix">
                         <div class="col-xs-12 col-sm-12 col-md-5 col-lg-5">
                             <label for="">Pencarian</label>
                             <div class="input-group">
@@ -62,13 +62,15 @@
                             <td>@{{ item.username }}</td>
                             <td>@{{ item.telp }}</td>
                             <td>
-                                <button class="btn btn-warning waves-effect" v-on:click="edit(item.id_admin)">
-                                    Ubah
-                                </button>
+                                <div class="btn-group" role="group">
+                                    <button class="btn btn-warning waves-effect" v-on:click="edit(item.id_admin)" data-toggle="tooltip" data-placement="top" title="Ubah">
+                                        <i class="material-icons">edit</i>
+                                    </button>
 
-                                <button class="btn btn-danger waves-effect" v-on:click="destroy(item.id_admin)">
-                                    Hapus
-                                </button>
+                                    <button class="btn bg-red waves-effect" v-on:click="destroy(item.id_admin)" data-toggle="tooltip" data-placement="top" title="Hapus">
+                                        <i class="material-icons">delete</i>
+                                    </button>
+                                </div>
                             </td>
                         </tr>
                         </tbody>

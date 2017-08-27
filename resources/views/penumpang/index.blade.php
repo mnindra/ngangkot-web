@@ -73,17 +73,19 @@
                                 </button>
                             </td>
                             <td>
-                                <button v-if="item.blokir == false" class="btn btn-danger waves-effect" v-on:click="blokir(item.id_penumpang)">
-                                    Blokir
-                                </button>
+                                <div class="btn-group" role="group">
+                                    <button v-if="item.blokir == false" class="btn bg-red waves-effect" v-on:click="blokir(item.id_penumpang)" data-toggle="tooltip" data-placement="top" title="Blokir">
+                                        <i class="material-icons">block</i>
+                                    </button>
 
-                                <button v-if="item.blokir == true" class="btn btn-primary waves-effect" v-on:click="unblokir(item.id_penumpang)">
-                                    Jangan Blokir
-                                </button>
+                                    <button v-if="item.blokir == true" class="btn bg-green waves-effect" v-on:click="unblokir(item.id_penumpang)" data-toggle="tooltip" data-placement="top" title="Hapus Blokir">
+                                        <i class="material-icons">check</i>
+                                    </button>
 
-                                <button class="btn btn-danger waves-effect" v-on:click="destroy(item.id_penumpang); hapus_foto(item.id_penumpang);">
-                                    Hapus
-                                </button>
+                                    <button type="button" class="btn bg-red waves-effect" v-on:click="destroy(item.id_penumpang); hapus_foto(item.id_penumpang);" data-toggle="tooltip" data-placement="top" title="Hapus">
+                                        <i class="material-icons">delete</i>
+                                    </button>
+                                </div>
                             </td>
                         </tr>
                         </tbody>
@@ -158,19 +160,19 @@
         };
 
         vue_table.blokir = function (id_penumpang) {
-          $.ajax({
-              url: '/penumpang/' + id_penumpang,
-              type: 'put',
-              headers: {
-                  'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-              },
-              data: {
-                  'blokir': 1
-              },
-              success: function () {
-                  console.log('penumpang diblokir')
-              }
-          });
+            $.ajax({
+                url: '/penumpang/' + id_penumpang,
+                type: 'put',
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                data: {
+                    'blokir': 1
+                },
+                success: function () {
+                    console.log('penumpang diblokir')
+                }
+            });
         };
 
         vue_table.unblokir = function (id_penumpang) {
