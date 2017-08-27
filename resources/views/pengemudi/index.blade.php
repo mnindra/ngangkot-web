@@ -159,7 +159,9 @@
 
             storage.ref('pengemudi/' + id_pengemudi + '/angkutan.jpg').getDownloadURL().then(function (url) {
                 $('#foto_angkutan').attr('src', url);
-            });
+            }).catch(function (error) {
+                $('#foto_angkutan').attr('src', 'http://via.placeholder.com/100x100');
+            });;
 
             $('#lihat_angkutan').modal({
                 show: true
@@ -170,7 +172,9 @@
             var id_pengemudi = item.id_pengemudi;
             storage.ref('pengemudi/' + id_pengemudi + '/pengemudi.jpg').getDownloadURL().then(function (url) {
                 $('#foto_pengemudi').attr('src', url);
-            });
+            }).catch(function (error) {
+                $('#foto_pengemudi').attr('src', 'http://via.placeholder.com/600x480');
+            });;
 
             $('#lihat_pengemudi').modal({
                 show: true

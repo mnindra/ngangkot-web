@@ -126,6 +126,8 @@
         vue_table.lihat_penumpang = function (id_penumpang) {
             storage.ref('penumpang/' + id_penumpang + '/penumpang.jpg').getDownloadURL().then(function (url) {
                 $('#foto_penumpang').attr('src', url);
+            }).catch(function (error) {
+                $('#foto_penumpang').attr('src', 'http://via.placeholder.com/600x480');
             });
 
             $('#lihat_penumpang').modal({
