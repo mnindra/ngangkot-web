@@ -33,7 +33,7 @@
     </div>
     <div class="card">
         <div class="body">
-            <form id="sign_in" method="POST">
+            <form id="sign_in">
                 <div class="msg">Login untuk melanjutkan</div>
                 <div class="input-group">
                         <span class="input-group-addon">
@@ -53,7 +53,7 @@
                 </div>
                 <div class="row">
                     <div class="col-xs-12 col-sm-12 col-md-12">
-                        <button class="btn btn-block btn-lg bg-indigo waves-effect" type="submit">LOGIN</button>
+                        <button class="btn btn-block btn-lg bg-indigo waves-effect" id="login" type="button">LOGIN</button>
                     </div>
                 </div>
             </form>
@@ -82,6 +82,25 @@
 
 <!-- Firebase Config -->
 <script src="{{ asset('js/firebase_config.js') }}"></script>
+
+<script>
+
+    $('#login').on('click', function () {
+        var email = $('input[name="email"]').val();
+        var password = $('input[name="password"]').val();
+        auth.signInWithEmailAndPassword(email, password).then(function () {
+            window.location = '/';
+        }).catch(function(error) {
+            window.location = '/login';
+        });
+    });
+
+    auth.onAuthStateChanged(function(user) {
+        if (user) {
+            window.location = '/';
+        }
+    });
+</script>
 
 </body>
 
