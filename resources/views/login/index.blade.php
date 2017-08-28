@@ -28,6 +28,9 @@
 <body class="login-page">
 <div class="login-box">
     <div class="logo">
+        <center>
+            <img src="{{ asset('images/logo.png') }}" alt="logo ngangkot" class="image img-responsive" width="50%">
+        </center>
         <a href="javascript:void(0);">Ngangkot</a>
         <small>Web Admin</small>
     </div>

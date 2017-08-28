@@ -101,6 +101,7 @@
                 'success': function () {
                     auth2.createUserWithEmailAndPassword(self.formInputs.email, self.formInputs.password).then(function() {
                         form.submit();
+                        auth2.signOut();
                     });
                 },
                 'error': function (xhr, status, error) {

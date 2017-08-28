@@ -110,12 +110,12 @@
 @section('script')
     <script>
         vue_table.destroy_auth = function (item) {
-            auth2.signInWithEmailAndPassword(item.email, item.password).then(function () {
-               auth2.currentUser.delete().then(function () {
-                   auth2.signOut();
-                   console.log('auth deleted');
-               });
+            getAuthUserByEmail(item.email, item.password).then(function (user) {
+                user.delete().then(function () {
+                    auth2.signOut();
+                    console.log('auth deleted');
+                });
             });
-        }
+        };
     </script>
 @endsection
