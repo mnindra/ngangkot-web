@@ -67,9 +67,9 @@
                                 <span v-if="item.blokir == true" class="col-red">diblokir</span>
                                 <span v-if="item.blokir == false">tidak diblokir</span>
                             </td>
-                            <td><button class="btn btn-primary waves-effect" v-on:click="lihat_pengemudi(item.id_pengemudi)">Lihat Foto</button></td>
+                            <td><button class="btn btn-primary btn-sm waves-effect" v-on:click="lihat_pengemudi(item.id_pengemudi)">Lihat Foto</button></td>
                             <td>
-                                <div class="btn-group" role="group">
+                                <div class="btn-group btn-group-xs" role="group">
                                     <button class="btn btn-primary waves-effect" v-on:click="lihat_angkutan(item.angkutan)" data-toggle="tooltip" data-placement="top" title="Lihat Angkutan">
                                         <i class="material-icons">directions_car</i>
                                     </button>

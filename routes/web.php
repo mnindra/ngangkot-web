@@ -11,9 +11,7 @@
 |
 */
 
-Route::get('/', function () {
-    return view('template');
-});
+Route::get('/', 'BerandaController@index');
 
 // Admin Route
 Route::get('/admin', 'AdminController@index');
