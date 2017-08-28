@@ -83,30 +83,25 @@
 <!-- Firebase Config -->
 <script src="{{ asset('js/firebase_config.js') }}"></script>
 
+<!-- Firebase Connector DB and Auth -->
+<script src="{{ asset('js/firebase-db-auth-connector.js') }}"></script>
+
 <script>
 
+    {{-- Login ke firebase --}}
     $('#login').on('click', function () {
         var email = $('input[name="email"]').val();
         var password = $('input[name="password"]').val();
-        auth.signInWithEmailAndPassword(email, password).then(function () {
-
-        }).catch(function(error) {
+        auth.signInWithEmailAndPassword(email, password).catch(function(error) {
             window.location = '/login';
         });
     });
 
+    {{-- Redirect apabila login berhasil --}}
     auth.onAuthStateChanged(function(user) {
         if (user) {
-            database.ref('admin').once('value').then(function(snapshot) {
-                var success = false;
-                var email = auth.currentUser.email;
-                for (var index in snapshot.val()) {
-                    if (snapshot.val()[index].email == email) {
-                        success = true;
-                    }
-                }
-
-                if(success) {
+            getDatabaseUserByEmail(auth.currentUser.email, "admin").then(function (user) {
+                if(user) {
                     window.location = '/';
                 } else {
                     auth.signOut();
