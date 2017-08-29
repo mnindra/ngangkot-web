@@ -62,9 +62,9 @@
                             <td>@{{ item.id_rute }}</td>
                             <td>@{{ item.keterangan }}</td>
                             <td>@{{ item.biaya }}</td>
-                            <td><button type="button" class="btn btn-primary waves-effect" v-on:click="lihat_rute(item.rute)">Lihat Rute</button></td>
+                            <td><button type="button" class="btn btn-primary btn-sm waves-effect" v-on:click="lihat_rute(item.rute)">Lihat Rute</button></td>
                             <td>
-                                <div class="btn-group" role="group">
+                                <div class="btn-group btn-group-xs" role="group">
                                     <button class="btn btn-warning waves-effect" v-on:click="edit(item.id_rute)" data-toggle="tooltip" data-placement="top" title="Ubah">
                                         <i class="material-icons">edit</i>
                                     </button>

@@ -62,7 +62,7 @@
                             <td>@{{ item.email }}</td>
                             <td>@{{ item.telp }}</td>
                             <td>
-                                <div class="btn-group" role="group">
+                                <div class="btn-group btn-group-xs" role="group">
                                     <button class="btn btn-warning waves-effect" v-on:click="edit(item.id_admin)" data-toggle="tooltip" data-placement="top" title="Ubah">
                                         <i class="material-icons">edit</i>
                                     </button>

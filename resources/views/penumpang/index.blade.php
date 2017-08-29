@@ -46,7 +46,7 @@
                         <tr>
                             <th>No</th>
                             <th>NAMA</th>
-                            <th>USERNAME</th>
+                            <th>E-MAIL</th>
                             <th>ALAMAT</th>
                             <th>TANGGAL DAFTAR</th>
                             <th>TELEPON</th>
@@ -59,7 +59,7 @@
                         <tr v-for="(item, index) in searchFilter">
                             <td>@{{ index + 1 }}</td>
                             <td>@{{ item.nama }}</td>
-                            <td>@{{ item.username }}</td>
+                            <td>@{{ item.email }}</td>
                             <td>@{{ item.alamat }}</td>
                             <td>@{{ item.tanggal }}</td>
                             <td>@{{ item.telp }}</td>
@@ -68,12 +68,12 @@
                                 <span v-if="item.blokir == false">tidak diblokir</span>
                             </td>
                             <td>
-                                <button class="btn btn-primary waves-effect" v-on:click="lihat_penumpang(item.id_penumpang)">
+                                <button class="btn btn-primary btn-sm waves-effect" v-on:click="lihat_penumpang(item.id_penumpang)">
                                     Lihat Foto
                                 </button>
                             </td>
                             <td>
-                                <div class="btn-group" role="group">
+                                <div class="btn-group btn-group-xs" role="group">
                                     <button v-if="item.blokir == false" class="btn bg-red waves-effect" v-on:click="blokir(item.id_penumpang)" data-toggle="tooltip" data-placement="top" title="Blokir">
                                         <i class="material-icons">block</i>
                                     </button>
