@@ -7,38 +7,38 @@
     <meta name="csrf-token" content="{{ csrf_token() }}" />
     <title>Ngangkot Web Admin</title>
     <!-- Favicon-->
-    <link rel="icon" href="../../favicon.ico" type="image/x-icon">
+    {{--<link rel="icon" href="../../favicon.ico" type="image/x-icon">--}}
 
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Roboto:400,700&subset=latin,cyrillic-ext" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" type="text/css">
 
     <!-- Bootstrap Core Css -->
-    <link href="{{ asset('css/bootstrap.css')  }}" rel="stylesheet">
+    <link href="{{ secure_asset('css/bootstrap.css')  }}" rel="stylesheet">
 
     <!-- Waves Effect Css -->
-    <link href="{{ asset('css/waves.css')  }}" rel="stylesheet" />
+    <link href="{{ secure_asset('css/waves.css')  }}" rel="stylesheet" />
 
     <!-- Animation Css -->
-    <link href="{{ asset('css/animate.css') }}" rel="stylesheet" />
+    <link href="{{ secure_asset('css/animate.css') }}" rel="stylesheet" />
 
     <!-- Bootstrap Material Datetime Picker Css -->
-    <link href="{{ asset('css/bootstrap-material-datetimepicker.css') }}" rel="stylesheet" />
+    <link href="{{ secure_asset('css/bootstrap-material-datetimepicker.css') }}" rel="stylesheet" />
 
     <!-- Wait Me Css -->
-    <link href="{{ asset('css/waitMe.css') }}" rel="stylesheet" />
+    <link href="{{ secure_asset('css/waitMe.css') }}" rel="stylesheet" />
 
     <!-- Bootstrap Select Css -->
-    <link href="{{ asset('css/bootstrap-select.css') }}" rel="stylesheet" />
+    <link href="{{ secure_asset('css/bootstrap-select.css') }}" rel="stylesheet" />
 
     <!-- Template Custom Css -->
-    <link href="{{ asset('css/style.css') }}" rel="stylesheet">
+    <link href="{{ secure_asset('css/style.css') }}" rel="stylesheet">
 
     <!-- AdminBSB Themes. You can choose a theme from css/themes instead of get all themes -->
-    <link href="{{ asset('css/all-themes.css') }}" rel="stylesheet" />
+    <link href="{{ secure_asset('css/all-themes.css') }}" rel="stylesheet" />
 
     <!-- Ngangkot Custom Css -->
-    <link rel="stylesheet" href="{{ asset('css/custom.css') }}">
+    <link rel="stylesheet" href="{{ secure_asset('css/custom.css') }}">
 </head>
 
 <body class="theme-blue">
@@ -76,9 +76,9 @@
         <!-- Left Sidebar -->
         <aside id="leftsidebar" class="sidebar">
             <!-- User Info -->
-            <div class="user-info" style="background: url('{{ asset('images/user-img-background.jpg') }}') no-repeat no-repeat;">
+            <div class="user-info" style="background: url('{{ secure_asset('images/user-img-background.jpg') }}') no-repeat no-repeat;">
                 <div class="image">
-                    <img src="{{ asset('images/user.png') }}" width="48" height="48" alt="User" />
+                    <img src="{{ secure_asset('images/user.png') }}" width="48" height="48" alt="User" />
                 </div>
                 <div class="info-container">
                     <div class="name" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="loggedIn_nama"></div>
@@ -158,46 +158,46 @@
     </section>
 
     <!-- Jquery Core Js -->
-    <script src="{{ asset('js/jquery.min.js') }}"></script>
+    <script src="{{ secure_asset('js/jquery.min.js') }}"></script>
 
     <!-- Bootstrap Core Js -->
-    <script src="{{ asset('js/bootstrap.js') }}"></script>
+    <script src="{{ secure_asset('js/bootstrap.js') }}"></script>
 
     <!-- Select Plugin Js -->
-    <script src="{{ asset('js/bootstrap-select.js') }}"></script>
+    <script src="{{ secure_asset('js/bootstrap-select.js') }}"></script>
 
     <!-- Slimscroll Plugin Js -->
-    <script src="{{ asset('js/jquery.slimscroll.js') }}"></script>
+    <script src="{{ secure_asset('js/jquery.slimscroll.js') }}"></script>
 
     <!-- Waves Effect Plugin Js -->
-    <script src="{{ asset('js/waves.js') }}"></script>
+    <script src="{{ secure_asset('js/waves.js') }}"></script>
 
     <!-- Tooltip JS -->
-    <script src="{{ asset('js/tooltips-popovers.js') }}"></script>
+    <script src="{{ secure_asset('js/tooltips-popovers.js') }}"></script>
 
     <!-- Custom Js -->
-    <script src="{{ asset('js/admin.js') }}"></script>
+    <script src="{{ secure_asset('js/admin.js') }}"></script>
 
     <!-- Firebase -->
     <script src="https://www.gstatic.com/firebasejs/4.3.0/firebase.js"></script>
 
     <!-- Firebase Config -->
-    <script src="{{ asset('js/firebase_config.js') }}"></script>
+    <script src="{{ secure_asset('js/firebase_config.js') }}"></script>
 
     <!-- Firebase Database and Auth User Connector -->
-    <script src="{{ asset('js/firebase-db-auth-connector.js') }}"></script>
+    <script src="{{ secure_asset('js/firebase-db-auth-connector.js') }}"></script>
 
     <!-- Firebase Auth -->
-    <script src="{{ asset('js/firebase_auth.js') }}"></script>
+    <script src="{{ secure_asset('js/firebase_auth.js') }}"></script>
 
     <!-- Vue JS -->
     <script src="https://unpkg.com/vue"></script>
 
     <!-- Form Validation (use vue) -->
-    <script src="{{ asset('js/form-validation.js') }}"></script>
+    <script src="{{ secure_asset('js/form-validation.js') }}"></script>
 
     <!-- Table operation (use vue) -->
-    <script src="{{ asset('js/table.js') }}"></script>
+    <script src="{{ secure_asset('js/table.js') }}"></script>
 
     @yield('script');
 
